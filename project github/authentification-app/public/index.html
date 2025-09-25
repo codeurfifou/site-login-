@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Authentification</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="main-container">
+    <h1>Bienvenue</h1>
+    
+    <!-- Bouton pour ouvrir le modal d'inscription -->
+    <button onclick="openModal('registerModal')" class="primary-btn">Inscription</button>
+    
+    <!-- Bouton pour ouvrir le modal de connexion -->
+    <button onclick="openModal('loginModal')" class="secondary-btn">Connexion</button>
+</div>
+
+<!-- Modal d'inscription -->
+<div id="registerModal" class="modal">
+    <span onclick="closeModal('registerModal')" class="close" title="Fermer">&times;</span>
+    <form class="modal-content" id="registerForm">
+        <div class="container">
+            <h1>Inscription</h1>
+            <p>Remplissez le formulaire pour créer un compte.</p>
+            <hr>
+            
+            <label for="reg-username"><b>Nom d'utilisateur</b></label>
+            <input type="text" placeholder="Nom d'utilisateur" name="username" id="reg-username" required>
+
+            <label for="reg-password"><b>Mot de passe</b></label>
+            <input type="password" placeholder="Mot de passe" name="password" id="reg-password" required>
+
+            <label for="reg-password-repeat"><b>Répétez le mot de passe</b></label>
+            <input type="password" placeholder="Répétez le mot de passe" name="passwordRepeat" id="reg-password-repeat" required>
+            
+            <label>
+                <input type="checkbox" name="terms" required> J'accepte les <a href="#" style="color:dodgerblue">termes de service</a>
+            </label>
+
+            <div class="clearfix">
+                <button type="button" onclick="closeModal('registerModal')" class="cancelbtn">Annuler</button>
+                <button type="submit" class="signupbtn">S'inscrire</button>
+            </div>
+            
+            <div id="registerMessage" class="message"></div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal de connexion -->
+<div id="loginModal" class="modal">
+    <span onclick="closeModal('loginModal')" class="close" title="Fermer">&times;</span>
+    <form class="modal-content" id="loginForm">
+        <div class="container">
+            <h1>Connexion</h1>
+            <p>Entrez vos identifiants.</p>
+            <hr>
+            
+            <label for="login-username"><b>Nom d'utilisateur</b></label>
+            <input type="text" placeholder="Nom d'utilisateur" name="username" id="login-username" required>
+
+            <label for="login-password"><b>Mot de passe</b></label>
+            <input type="password" placeholder="Mot de passe" name="password" id="login-password" required>
+
+            <div class="clearfix">
+                <button type="button" onclick="closeModal('loginModal')" class="cancelbtn">Annuler</button>
+                <button type="submit" class="loginbtn">Se connecter</button>
+            </div>
+            
+            <div id="loginMessage" class="message"></div>
+        </div>
+    </form>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
