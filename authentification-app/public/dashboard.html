@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Tableau de bord</h1>
+        <p>Bienvenue dans votre espace personnel</p>
+    </div>
+
+    <div class="user-info">
+        <h3>Informations utilisateur</h3>
+        <p><strong>Nom d'utilisateur:</strong> <span id="username">Chargement...</span></p>
+        <p><strong>Statut:</strong> Connecté</p>
+        <p><strong>Dernière connexion:</strong> <span id="currentTime"></span></p>
+    </div>
+
+    <div class="dashboard-content">
+        <h3>Actions disponibles</h3>
+        <p>Vous êtes maintenant connecté avec succès. Cette page est protégée et n'est accessible qu'aux utilisateurs authentifiés.</p>
+        
+        <div style="margin-top: 30px;">
+            <button onclick="logout()" class="logout-btn">Se déconnecter</button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // Vérifier l'authentification
+    try {
+        const response = await fetch('/check-auth');
+        const result = await response.json();
+        
+        if (result.authenticated) {
+            document.getElementById('username').textContent = result.username;
+            document.getElementById('currentTime').textContent = new Date().toLocaleString('fr-FR');
+        } else {
+            window.location.href = '/';
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        window.location.href = '/';
+    }
+});
+
+async function logout() {
+    try {
+        const response = await fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            window.location.href = '/';
+        }
+    } catch (error) {
+        console.error('Erreur lors de la déconnexion:', error);
+    }
+}
+</script>
+
+</body>
+</html>
